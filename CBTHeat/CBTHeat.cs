@@ -94,6 +94,16 @@ namespace CBTHeat
                 int turnsOverheated = __instance.StatCollection.GetValue<int>("TurnsOverheated");
                 float shutdownPercentage = CBTHeat.GetShutdownPercentageForTurn(turnsOverheated);
                 float ammoExplosionPercentage = CBTHeat.GetAmmoExplosionPercentageForTurn(turnsOverheated);
+                float shutdownPercentageHeat = ((float)__instance.CurrentHeat- (float)__instance.OverheatLevel)/((float)__instance.MaxHeat-(float)__instance.OverheatLevel);
+
+                float shutdownTest = 0;
+                if (CBTHeat.Settings.UseCurrentHeat) {
+                    shutdownTest += shutdownPercentageHeat;
+                }
+                else
+                {
+                    shutdownTest = shutdownPercentage;
+                }
 
                 if (heatLogger.IsLogEnabled)
                 {
@@ -110,10 +120,14 @@ namespace CBTHeat
                     heatLogger.Log(string.Format("[CBTHeat] Ammo Roll Target: {0}", ammoExplosionPercentage));
                 }
 
-                if (CBTHeat.Settings.UseGuts)
+                if (CBTHeat.Settings.UseGuts && CBTHeat.Settings.UseCurrentHeat)
                 {
-                    ammoRoll = ammoRoll + gutsTestChance;
-                    skillRoll = skillRoll + gutsTestChance;
+                    ammoRoll += gutsTestChance;
+                }
+                else if (CBTHeat.Settings.UseGuts)
+                {
+                    ammoRoll += gutsTestChance;
+                    skillRoll += gutsTestChance;
                 }
 
                 MultiSequence sequence = new MultiSequence(__instance.Combat);
@@ -128,19 +142,19 @@ namespace CBTHeat
                         var ammoBox = __instance.ammoBoxes.Where(box => box.CurrentAmmo > 0).OrderByDescending(box => box.CurrentAmmo / box.AmmoCapacity).FirstOrDefault();
                         if (ammoBox != null)
                         {
-                            var fakeHit = new WeaponHitInfo(stackItemID, -1, -1, -1, string.Empty, string.Empty, -1, null, null, null, null, null, null, null, AttackDirection.None, Vector2.zero, null);
+                            var fakeHit = new WeaponHitInfo(stackItemID, -1, -1, -1, string.Empty, string.Empty, -1, null, null, null, null, null, null, null, new AttackDirection[] { AttackDirection.None }, null, null, null);
                             ammoBox.DamageComponent(fakeHit, ComponentDamageLevel.Destroyed, true);
                         }
-
                         return;
                     }
-
+                    if (ammoExplosionPercentage != 0) { 
                     sequence.AddChildSequence(new ShowActorInfoSequence(__instance, "Ammo Explosion Avoided!", FloatieMessage.MessageNature.Debuff, true), sequence.ChildSequenceCount - 1);
-                } 
+                    }
+                }
                 
                 if (!__instance.IsPastMaxHeat)
                 {
-                    if (skillRoll < shutdownPercentage)
+                    if (skillRoll < shutdownTest)
                     {
                         if (heatLogger.IsLogEnabled)
                         {
@@ -158,7 +172,6 @@ namespace CBTHeat
                         {
                             heatLogger.Log(string.Format("[CBTHeat] Skill Check Succeeded!"));
                         }
-
                         sequence.AddChildSequence(new ShowActorInfoSequence(__instance, "Shutdown Override Successful!", FloatieMessage.MessageNature.Buff, true), sequence.ChildSequenceCount - 1);
 
                         turnsOverheated += 1;
@@ -212,6 +225,9 @@ namespace CBTHeat
 
         [JsonProperty("UseGuts")]
         public bool UseGuts { get; set; }
+
+        [JsonProperty("UseCurrentHeat")]
+        public bool UseCurrentHeat { get; set; }
 
         [JsonProperty("GutsDivisor")]
         public int GutsDivisor { get; set; }
