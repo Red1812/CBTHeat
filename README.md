@@ -36,8 +36,7 @@ You will not see "Ammo Explosion Avoided!" anymore if ammo explosion chance is 0
 ## Changelog
 
 ### v0.6.0
-Quick fix for BT 1.6.1
-Added Heat level based shutdown chance
+Quick fix for BT 1.6.1. Added Heat level based shutdown chance
 
 ### v0.2.0
 Added an overheat movement modifier in a way that's similar to ToHit modifier.  This version sets the base OverheatedMovePenalty to 0 in CombatGameConstants.json and adds the mods modifier table set in mod.json.
