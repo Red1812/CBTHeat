@@ -28,8 +28,8 @@ In mod.json if you have "UseCurrentHeat" to true the shutdown chance will be cal
 ShutdownChance = (CurrentHealtLevel - OverheatThreshold)/(MaxHeat - OverHeatThreshold)
 Then you roll against ShutdownChance.
 
-In this mode you will not shutdown based on how long you've been overheating, meaning that if you succeed to mantain your overheat rather low you'll have a better chance to avoid shutdown as turns passed. On the other end is you overheat by a large margin you're more likely to shutdown earlier.
-This doesn't change anything on the other modifiers and they are still based on turns. So ammo coocking is still bad and dangerous.
+In this mode you will not shutdown based on how long you've been overheating, meaning that if you succeed to maintain your overheat rather low you'll have a better chance to avoid shutdown as turns passed. On the other end, if you overheat by a large margin you're more likely to shutdown earlier.
+This doesn't change anything on the other modifiers and they are still based on turns. So ammo cooking is still bad and dangerous.
 
 You will not see "Ammo Explosion Avoided!" anymore if ammo explosion chance is 0 (so on the first turn on default settings).
 
