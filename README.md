@@ -5,6 +5,7 @@ CBT Heat brings Classic Battletech Tabletop heat rules feeling into HBS's BATTLE
 Firstly, a mech will no longer suffer damage from overheating.  This seemed a little unfair considering the rest of the changes and really didn't happen in CBT. To counter not being damaged, your mech will have a chance to shutdown and have its ammo explode every turn you are overheated.  The chances of that happening depend on the number of rounds you have been overheated.  I've tried to convert the original CBT heat chart in to percentages and apply them here.  The original CBT heat scale had 4 Shutdown roll chances and 4 Ammo Explosion chances as well as Heat modifiers to Hit.  So I've converted those chances (which were originally 2d6 rolls) and applied them to the overheat mechanic of the game. The game will roll randomly for each percentage.  Ammo Explosion results are applied first.
 
 __NEW in v0.2.0__: Movement Modifiers
+
 Movement modifiers work the same way ToHit Modifiers.  The movement modifier will increase the longer your mech is overheated.  That means the longer you overheat, the less movement you will have available.  This only affects walk and sprint movement.  Jump is unaffected.
 
 The way the game applies movement modifiers is that it adds up all the the modifiers, subtracts them from 1 to get what is essentially a percentage, and then multiplies that by your total movement. So that means, for example, on the first overheat turn, you will have 90% of your total movement available to use (assuming you don't have any other movement modifiers, like a missing leg).
@@ -22,11 +23,14 @@ These chances are also displayed in the Overheat notification badge above the he
 All chances and modifiers are configurable in the mod.json file.
 
 __NEW in v0.6.0__: Heat level based shutdown chance
+
 In mod.json if you have "UseCurrentHeat" to true the shutdown chance will be calculated as following:
 ShutdownChance = (CurrentHealtLevel - OverheatThreshold)/(MaxHeat - OverHeatThreshold)
 Then you roll against ShutdownChance.
+
 In this mode you will not shutdown based on how long you've been overheating, meaning that if you succeed to mantain your overheat rather low you'll have a better chance to avoid shutdown as turns passed. On the other end is you overheat by a large margin you're more likely to shutdown earlier.
 This doesn't change anything on the other modifiers and they are still based on turns. So ammo coocking is still bad and dangerous.
+
 You will not see "Ammo Explosion Avoided!" anymore if ammo explosion chance is 0 (so on the first turn on default settings).
 
 ## Installation
@@ -36,7 +40,8 @@ You will not see "Ammo Explosion Avoided!" anymore if ammo explosion chance is 0
 ## Changelog
 
 ### v0.6.0
-Quick fix for BT 1.6.1. Added Heat level based shutdown chance
+Quick fix for BT 1.6.1. 
+Added Heat level based shutdown chance
 
 ### v0.2.0
 Added an overheat movement modifier in a way that's similar to ToHit modifier.  This version sets the base OverheatedMovePenalty to 0 in CombatGameConstants.json and adds the mods modifier table set in mod.json.
