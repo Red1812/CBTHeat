@@ -1,4 +1,4 @@
-# CBT Heat
+# CBT Heat for BT 1.6.1
 
 CBT Heat brings Classic Battletech Tabletop heat rules feeling into HBS's BATTLETECH game.  In the Classic Battletech Tabletop game, heat management had a more press-your-luck style component to it.  This mod is an attempt to fit that style of mechanic into the heat system of this game.  Note that this is more of an attempt to blend the 2 systems together than a total reimplementation.
 
@@ -21,11 +21,23 @@ These chances are also displayed in the Overheat notification badge above the he
 
 All chances and modifiers are configurable in the mod.json file.
 
+__NEW in v0.6.0__: Heat level based shutdown chance
+In mod.json if you have "UseCurrentHeat" to true the shutdown chance will be calculated as following:
+ShutdownChance = (CurrentHealtLevel - OverheatThreshold)/(MaxHeat - OverHeatThreshold)
+Then you roll against ShutdownChance.
+In this mode you will not shutdown based on how long you've been overheating, meaning that if you succeed to mantain your overheat rather low you'll have a better chance to avoid shutdown as turns passed. On the other end is you overheat by a large margin you're more likely to shutdown earlier.
+This doesn't change anything on the other modifiers and they are still based on turns. So ammo coocking is still bad and dangerous.
+You will not see "Ammo Explosion Avoided!" anymore if ammo explosion chance is 0 (so on the first turn on default settings).
+
 ## Installation
 
-Install [BTML](https://github.com/Mpstark/BattleTechModLoader) and [ModTek](https://github.com/Mpstark/ModTek). Extract files to `BATTLETECH\Mods\CBTHeat\`.
+[ModTek](https://github.com/BattletechModders/ModTek/releases). Extract files to `BATTLETECH\Mods\CBTHeat\`.
 
 ## Changelog
+
+### v0.6.0
+Quick fix for BT 1.6.1
+Added Heat level based shutdown chance
 
 ### v0.2.0
 Added an overheat movement modifier in a way that's similar to ToHit modifier.  This version sets the base OverheatedMovePenalty to 0 in CombatGameConstants.json and adds the mods modifier table set in mod.json.
