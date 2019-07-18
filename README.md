@@ -1,4 +1,4 @@
-# CBT Heat for BT 1.6.1
+# CBT Heat for BT 1.6.2
 
 CBT Heat brings Classic Battletech Tabletop heat rules feeling into HBS's BATTLETECH game.  In the Classic Battletech Tabletop game, heat management had a more press-your-luck style component to it.  This mod is an attempt to fit that style of mechanic into the heat system of this game.  Note that this is more of an attempt to blend the 2 systems together than a total reimplementation.
 
