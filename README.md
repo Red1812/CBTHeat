@@ -1,4 +1,4 @@
-# CBT Heat for BT 1.6.2
+# CBT Heat for BT 1.7
 
 CBT Heat brings Classic Battletech Tabletop heat rules feeling into HBS's BATTLETECH game.  In the Classic Battletech Tabletop game, heat management had a more press-your-luck style component to it.  This mod is an attempt to fit that style of mechanic into the heat system of this game.  Note that this is more of an attempt to blend the 2 systems together than a total reimplementation.
 
@@ -38,6 +38,9 @@ You will not see "Ammo Explosion Avoided!" anymore if ammo explosion chance is 0
 [ModTek](https://github.com/BattletechModders/ModTek/releases). Extract files to `BATTLETECH\Mods\CBTHeat\`.
 
 ## Changelog
+
+### v0.7
+Quick fix for 1.7.
 
 ### v0.6.0
 Quick fix for BT 1.6.1. 
